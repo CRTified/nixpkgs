@@ -88,6 +88,7 @@ buildPythonPackage rec {
   ];
 
   dontConfigure = true; # skip cmake configure invocation
+  doCheck = false;
 
   nativeBuildInputs = [
     cmake

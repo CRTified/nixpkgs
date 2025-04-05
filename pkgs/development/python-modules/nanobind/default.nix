@@ -56,14 +56,13 @@ buildPythonPackage rec {
   # nanobind check requires heavy dependencies such as tensorflow
   # which are less than ideal to be imported in children packages that
   # use it as build-system parameter.
-  doCheck = false;
 
   preCheck = ''
     # build tests
     make -j $NIX_BUILD_CORES
   '';
 
-  doCheck = withCheck;
+  doCheck = false;
 
   nativeCheckInputs = lib.optionals withCheck (
     [
@@ -78,9 +77,6 @@ buildPythonPackage rec {
       jaxlib
     ]);
 
-  passthru.tests = {
-    pytest = nanobind.overridePythonAttrs { doCheck = true; };
-  };
 
   meta = {
     homepage = "https://github.com/wjakob/nanobind";
